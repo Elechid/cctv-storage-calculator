@@ -13,3 +13,9 @@ Enter the camera count, average Mbps per camera while recording, retention days,
 All calculations run in the browser. Run locally with `python3 -m http.server` and open `http://localhost:8000`. Run the calculation tests with `node calculator.test.mjs`.
 
 [Elechid CCTV storage guide](https://elechid.com/en/blogs/news/cctv-recording-days-storage-calculator-hong-kong) · [MIT license](LICENSE)
+
+**繁中例子：** 4 部鏡頭，每部 4 Mbps，連續錄影 30 日約需 5.184 TB；加 20% 預留後約需 6.221 TB。
+
+## Mobile preview｜手機預覽
+
+<img src="mobile-preview.jpg" width="375" alt="Traditional Chinese calculator on mobile / 繁體中文計算器手機畫面">
