@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estimate CCTV hard drive capacity from camera count, bitrate and retention days. Free and open source, by Elechid 音立.">
+<title>CCTV storage calculator | Elechid 音立</title>
+<style>
+:root { color: #152624; background: #edf4ef; font: 16px/1.55 system-ui,sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 60rem; margin: auto; padding: clamp(1rem,5vw,3.5rem); }
+header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+h1 { font-size: clamp(2rem,6vw,3.5rem); line-height: 1.08; letter-spacing: -.03em; margin-bottom: .4em; }
+p { max-width: 66ch; }
+form, .results { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,13rem),1fr)); gap: .8rem; margin-block: 1.5rem; }
+label, .results div { display: block; padding: .9rem 1rem; background: #fff; border: 1px solid #bbcfc4; border-radius: .75rem; }
+label { font-weight: 600; }
+input, button { font: inherit; color: inherit; border: 1px solid #58766a; border-radius: .4rem; background: #fff; padding: .45rem .65rem; }
+input { display: block; margin-top: .4rem; width: 100%; }
+button { cursor: pointer; }
+a { color: #075238; text-underline-offset: .17em; }
+output { display: block; font-size: 1.7rem; font-weight: 750; overflow-wrap: anywhere; }
+#error { color: #a42125; }
+</style>
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<main>
+<header><a id="brand" href="https://elechid.com/en/">Elechid 音立</a><button type="button" id="language" lang="zh-Hant">繁體中文</button></header>
+<h1 id="title">CCTV storage calculator</h1>
+<p id="intro">Estimate how much storage your cameras need for continuous or event recording. Use the average bitrate per camera while recording.</p>
+<form id="inputs">
+<label><span id="cameras-label">Number of cameras</span><input id="cameras" type="number" min="1" max="512" step="1" value="4" required></label>
+<label><span id="bitrate-label">Bitrate per camera (Mbps)</span><input id="bitrate" type="number" min="0.001" max="1000" step="any" value="4" required></label>
+<label><span id="days-label">Retention (days)</span><input id="days" type="number" min="1" max="3650" step="1" value="30" required></label>
+<label><span id="duty-label">Time spent recording (%)</span><input id="duty" type="number" min="0" max="100" step="any" value="100" required></label>
+<label><span id="reserve-label">Extra capacity (%)</span><input id="reserve" type="number" min="0" max="100" step="any" value="20" required></label>
+</form>
+<p id="error" role="status" hidden>Enter a valid value in each field.</p>
+<section class="results" aria-live="polite">
+<div><span id="daily-label">Per day</span><output id="daily">—</output></div>
+<div><span id="total-label">For the retention period</span><output id="total">—</output></div>
+<div><span id="planned-label">Including extra capacity</span><output id="planned">—</output></div>
+</section>
+<noscript>JavaScript is required. 此工具需要 JavaScript。</noscript>
+<p id="notes">Use 100% for continuous recording. For event recording, estimate the share of time actually recorded, including pre-roll and post-roll. Actual usage depends on scene activity, audio, encoder settings and recorder overhead. 1 TB = 1,000 GB.</p>
+<p><a id="guide" href="https://elechid.com/en/blogs/news/cctv-recording-days-storage-calculator-hong-kong">Elechid CCTV storage guide</a> · <a id="code" href="https://github.com/Elechid/cctv-storage-calculator">Source code</a></p>
+</main>
+</body>
+</html>
