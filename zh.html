@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="4 支 CCTV 連續錄影 30 日要幾多容量？ 估算連續錄影或事件錄影所需的儲存容量。請輸入每部鏡頭錄影時的平均碼率。">
+<title>CCTV 錄影容量計算器 | Elechid 音立</title>
+<style>
+:root { color: #152624; background: #edf4ef; font: 16px/1.55 system-ui,sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 60rem; margin: auto; padding: clamp(1rem,5vw,3.5rem); }
+header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+h1 { font-size: clamp(2rem,6vw,3.5rem); line-height: 1.08; letter-spacing: -.03em; margin-bottom: .4em; }
+p { max-width: 66ch; }
+form, .results { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,13rem),1fr)); gap: .8rem; margin-block: 1.5rem; }
+label, .results div { display: block; padding: .9rem 1rem; background: #fff; border: 1px solid #bbcfc4; border-radius: .75rem; }
+label { font-weight: 600; }
+input, button { font: inherit; color: inherit; border: 1px solid #58766a; border-radius: .4rem; background: #fff; padding: .45rem .65rem; }
+input { display: block; margin-top: .4rem; width: 100%; }
+button { cursor: pointer; }
+a { color: #075238; text-underline-offset: .17em; }
+output { display: block; font-size: 1.7rem; font-weight: 750; overflow-wrap: anywhere; }
+#error { color: #a42125; }
+</style>
+<script type="module" src="app.mjs?v=20261116"></script>
+<link rel="canonical" href="https://elechid.github.io/cctv-storage-calculator/zh.html"><link rel="alternate" href="https://elechid.github.io/cctv-storage-calculator/" hreflang="en-HK"><link rel="alternate" href="https://elechid.github.io/cctv-storage-calculator/zh.html" hreflang="zh-Hant-HK"></head>
+<body>
+<main>
+<header><a id="brand" href="https://elechid.com/">Elechid 音立</a><button type="button" id="language" lang="en">English</button></header>
+<h1 id="title">CCTV 錄影容量計算器</h1>
+<p id="intro">估算連續錄影或事件錄影所需的儲存容量。請輸入每部鏡頭錄影時的平均碼率。</p><section><h2 data-example-en="How much storage do four CCTV cameras need for 30 days?" data-example-zh="4 支 CCTV 連續錄影 30 日要幾多容量？">4 支 CCTV 連續錄影 30 日要幾多容量？</h2><p data-example-en="At 4 Mbps per camera, four cameras recording continuously for 30 days need about 5.184 TB before headroom. With 20% extra, plan for about 6.221 TB of usable storage. This uses decimal TB and an average bitrate. Check the recorder’s supported drives, formatting and any RAID overhead." data-example-zh="每支平均 4 Mbps，4 支連續錄影 30 日約需 5.184 TB。加 20% 預留後，約需 6.221 TB 可用容量。這個例子按十進制 TB 和平均碼率估算，揀硬碟前要核對錄影機支援上限、格式化及 RAID 佔用。">每支平均 4 Mbps，4 支連續錄影 30 日約需 5.184 TB。加 20% 預留後，約需 6.221 TB 可用容量。這個例子按十進制 TB 和平均碼率估算，揀硬碟前要核對錄影機支援上限、格式化及 RAID 佔用。</p></section>
+<form id="inputs">
+<label><span id="cameras-label">鏡頭數量</span><input id="cameras" type="number" min="1" max="512" step="1" value="4" required=""></label>
+<label><span id="bitrate-label">每部鏡頭碼率（Mbps）</span><input id="bitrate" type="number" min="0.001" max="1000" step="any" value="4" required=""></label>
+<label><span id="days-label">錄影保留日數</span><input id="days" type="number" min="1" max="3650" step="1" value="30" required=""></label>
+<label><span id="duty-label">實際錄影時間比例（%）</span><input id="duty" type="number" min="0" max="100" step="any" value="100" required=""></label>
+<label><span id="reserve-label">額外預留容量（%）</span><input id="reserve" type="number" min="0" max="100" step="any" value="20" required=""></label>
+</form>
+<p id="error" role="status" hidden="">請在每一欄輸入有效數值。</p>
+<section class="results" aria-live="polite">
+<div><span id="daily-label">每日用量</span><output id="daily">172.8 GB</output></div>
+<div><span id="total-label">保留期總用量</span><output id="total">5.184 TB</output></div>
+<div><span id="planned-label">連預留容量</span><output id="planned">6.221 TB</output></div>
+</section>
+<noscript>互動計算需要 JavaScript。</noscript>
+<p id="notes">24 小時連續錄影請填 100%。事件錄影請估算實際錄到的時間比例，計入觸發前後的片段。實際用量會受畫面活動、收音、編碼設定及錄影機額外用量影響。1 TB = 1,000 GB。</p>
+<p><a id="guide" href="https://elechid.com/blogs/news/cctv-recording-days-storage-calculator-hong-kong">Elechid 錄影容量選購指南</a> · <a id="code" href="https://github.com/Elechid/cctv-storage-calculator">原始碼</a></p>
+<nav aria-label="語言及工具索引"><a href="./" lang="en" hreflang="en">English</a> <a href="./zh.html" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a> <a href="https://github.com/Elechid">Elechid 工具索引</a> </nav></main>
+
+
+</body></html>

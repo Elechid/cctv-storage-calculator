@@ -38,6 +38,9 @@ function applyLanguage(chinese) {
   const copy = chinese ? translations : english;
   const prefix = chinese ? '' : '/en';
   document.documentElement.lang = chinese ? 'zh-Hant' : 'en';
+  for (const node of document.querySelectorAll('[data-example-en]')) {
+    node.textContent = chinese ? node.dataset.exampleZh : node.dataset.exampleEn;
+  }
   document.title = copy.title + ' | Elechid 音立';
   for (const [id, value] of Object.entries(copy)) byId(id).textContent = value;
   byId('language').textContent = chinese ? 'English' : '繁體中文';
@@ -53,8 +56,9 @@ byId('language').addEventListener('click', () => {
   const chinese = document.documentElement.lang === 'en';
   const url = new URL(location.href);
   if (chinese) url.searchParams.set('lang', 'zh');
+  else if (url.pathname.endsWith('/zh.html')) url.searchParams.set('lang', 'en');
   else url.searchParams.delete('lang');
   history.replaceState(null, '', url);
   applyLanguage(chinese);
 });
-applyLanguage(new URLSearchParams(location.search).get('lang') === 'zh');
+applyLanguage((new URLSearchParams(location.search).get('lang') ?? (location.pathname.endsWith('/zh.html') ? 'zh' : 'en')) === 'zh');
